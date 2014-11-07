@@ -7,6 +7,6 @@ Requires=etcd.service
 
 [Service]
 ExecStartPre=/bin/sh -c "/usr/bin/docker rm -f rabbitmq > /dev/null ; true"
-ExecStart=/usr/bin/docker run --name rabbitmq --env-file /etc/environment -p 5672:5672 -p 15672:15672 skrat/rabbitmq-etcd
+ExecStart=/usr/bin/docker run --name rabbitmq --env-file /etc/environment -p 5672:5672 -p 15672:15672 ndslabs/rabbitmq-etcd
 ExecStop=/usr/bin/docker stop rabbitmq
 ExecStopPost=/usr/bin/docker rm -f rabbitmq
