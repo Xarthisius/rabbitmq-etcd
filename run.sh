@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 # Monitor mode for job control, allows fg in the last line
 set -o monitor
 
 # Reads RabbitMQ environment and starts server in the backgroun
 source /etc/rabbitmq/rabbitmq-env.conf
-/usr/bin/rabbitmq-server &
+/usr/lib/rabbitmq/bin/rabbitmq-server &
 
 waits=1
 
@@ -27,7 +27,7 @@ echo "=> Redirecting log file $logfile to stdout"
 ) &
 
 echo "=> Starting crond"
-/usr/bin/crond -s
+/usr/sbin/cron
 
 echo "=> Starting configsync.py in the background"
 /configsync.py & fg %1 > /dev/null
