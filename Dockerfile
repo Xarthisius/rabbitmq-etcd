@@ -3,7 +3,7 @@ MAINTAINER Kacper Kowalik <xarthisius.kk@gmail.com>
 
 # Install RabbitMQ
 RUN apt-get update && \
-    apt-get install -y rabbitmq-server curl sudo python-dev python-pip && \
+    apt-get install -y rabbitmq-server curl sudo python-dev python-pip logrotate cron && \
     rabbitmq-plugins enable rabbitmq_management && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
