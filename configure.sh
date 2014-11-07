@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -f /.configured ]; then
 	echo "RabbitMQ password already set!"
