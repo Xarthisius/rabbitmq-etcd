@@ -123,4 +123,6 @@ if __name__ == '__main__':
             time.sleep(1)
         except KeyError as e:
             time.sleep(1)
+        except etcd.EtcdException as e:
+            time.sleep(1)
 
