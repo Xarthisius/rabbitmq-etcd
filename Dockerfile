@@ -1,11 +1,12 @@
-FROM debian:sid
+FROM ubuntu:trusty
 MAINTAINER Kacper Kowalik <xarthisius.kk@gmail.com>
 
 # Install RabbitMQ
 RUN apt-get update && \
   apt-get install -qy python-setuptools python-urllib3 python-openssl python-httplib2 \
-    rabbitmq-server logrotate cron wget && \
+    rabbitmq-server logrotate cron wget python-pip python-cffi libpython-dev libssl-dev && \
   rabbitmq-plugins enable rabbitmq_management && \
+  pip install python-etcd && \
   apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Installs Configuration Synchronization service
@@ -15,11 +16,12 @@ RUN cd /tmp && \
   python setup.py install && \
   cd /tmp && rm -rf pyrabbit*
 
-RUN cd /tmp && \
-  wget https://github.com/jplana/python-etcd/archive/0.3.3.tar.gz && \
-  tar xvf 0.3.3.tar.gz && cd python-etcd-0.3.3/ && \
-  python setup.py install && \
-  cd /tmp && rm -rf 0.3.3.tar.gz python-etcd*
+
+#RUN cd /tmp && \
+#  wget https://github.com/jplana/python-etcd/archive/0.3.3.tar.gz && \
+#  tar xvf 0.3.3.tar.gz && cd python-etcd-0.3.3/ && \
+#  python setup.py install && \
+#  cd /tmp && rm -rf 0.3.3.tar.gz python-etcd*
 
 # Add and run scripts
 ADD configure.sh /configure.sh
