@@ -3,11 +3,14 @@ MAINTAINER Kacper Kowalik <xarthisius.kk@gmail.com>
 
 # Install RabbitMQ
 RUN apt-get update && \
-  apt-get install -qy python-setuptools python-urllib3 python-openssl python-httplib2 \
+  apt-get install -qy python-setuptools python-urllib3 python-openssl python-httplib2 curl \
     rabbitmq-server logrotate cron wget python-pip python-cffi libpython-dev libssl-dev && \
   rabbitmq-plugins enable rabbitmq_management && \
   pip install python-etcd && \
   apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN rm -rf /usr/lib/python2.7/dist-packages/urllib3* && \
+  pip install urllib3==1.9.1
 
 # Installs Configuration Synchronization service
 RUN cd /tmp && \
